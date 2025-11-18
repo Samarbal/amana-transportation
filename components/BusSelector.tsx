@@ -1,12 +1,14 @@
 "use client";
 import React from "react";
 
+import type { BusId } from "./BusStatus";
+
 interface BusSelectorProps {
-  selectedBus: number;
-  onSelect: (bus: number) => void;
+  selectedBus: BusId;
+  onSelect: (bus: BusId) => void;
 }
 
-const buses = [1, 2, 3, 4, 5, 6];
+const buses: BusId[] = [1, 2];
 
 const BusSelector: React.FC<BusSelectorProps> = ({ selectedBus, onSelect }) => {
   return (

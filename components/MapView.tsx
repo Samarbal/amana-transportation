@@ -1,6 +1,12 @@
 "use client";
-import React, { useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, Polyline } from "react-leaflet";
+import React from "react";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  Polyline,
+} from "react-leaflet";
 import L from "../utils/leafletFix";
 
 interface MapViewProps {
@@ -20,6 +26,18 @@ const busRoutes: Record<number, [number, number][]> = {
   ],
 };
 
+// 🚌 Emoji Icon
+const busIcon = L.divIcon({
+  html: `<div style="
+    font-size: 26px;
+    line-height: 26px;
+    text-align: center;
+  ">🚌</div>`,
+  className: "",
+  iconSize: [30, 30],
+  iconAnchor: [15, 15],
+});
+
 const MapView: React.FC<MapViewProps> = ({ selectedBus }) => {
   const positions = busRoutes[selectedBus] || busRoutes[1];
 
@@ -38,7 +56,7 @@ const MapView: React.FC<MapViewProps> = ({ selectedBus }) => {
         <Polyline positions={positions} color="red" />
 
         {positions.map((pos, idx) => (
-          <Marker key={idx} position={pos}>
+          <Marker key={idx} position={pos} icon={busIcon}>
             <Popup>
               Stop {idx + 1} <br />
               Bus {selectedBus}
